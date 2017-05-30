@@ -45,6 +45,18 @@ Read the intro and next steps on localhost:3000
 Edit `src/YourComponent.js`.  
 Your changes will appear without reloading the browser like in [this video](http://vimeo.com/100010922).
 
+### What do we look for?
+
+| Points given |                   Task                   | Notes                                                                |
+|:------------:|------------------------------------------|----------------------------------------------------------------------|
+|      0       |                 Map only                 | No markers or hard coded markers                                     |
+|      1       |                 Slow map                 | The first Google Maps API Query (~6 markers)                         |
+|      1       |                 Good code                | <ul> <li>Clear code</li> <li>Comments</li> <li>Use of ES6 * Coherent directory structure</li> </ul> |
+|      1       |              Favorites list              | Add to favorites and remove them                                     |
+|      1       | State and component based favorites list |                                                                      |
+|      1       |         Instant render of markers        | <ul> <li>1 react render</li> <li>> 200 markers</li> </ul>            |
+|      1       |              "Make it yours"             | <ul> <li>UX</li> <li>Backend implementation</li> <li>Other?</li> </ul> |
+
 ### Source
 
 This boilerplate project is a mirror plus a few additions from gaearon's react boilerplate (https://github.com/gaearon/react-hot-boilerplate)
