@@ -39,9 +39,7 @@ const httpCodes = (code = 200) => {
 const OUT = (req, res, { code = 200, message, data }) => {
   let logger = req.app.get("logger");
 
-  console.log(
-    `Sending response status: ${code}, message: ${message}, data: ${JSON.stringify(data, null, 2)}`
-  );
+  console.log(`Sending response status: ${code}, message: ${message}`);
 
   let result = httpCodes(code);
 

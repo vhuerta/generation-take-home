@@ -54,7 +54,7 @@ var OUT = function OUT(req, res, _ref) {
 
   var logger = req.app.get("logger");
 
-  console.log("Sending response status: " + code + ", message: " + message + ", data: " + JSON.stringify(data, null, 2));
+  console.log("Sending response status: " + code + ", message: " + message);
 
   var result = httpCodes(code);
 
