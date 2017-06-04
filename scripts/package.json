@@ -1,0 +1,25 @@
+{
+  "name": "generation-take-home-scripts",
+  "version": "1.0.0",
+  "description": "Script to geocode the stores array",
+  "main": "geocode_stores.js",
+  "scripts": {
+    "geolocate": "./node_modules/.bin/babel-node geolocate_stores.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vhuerta/generation-take-home.git"
+  },
+  "author": "Victor Huerta <vhuertahnz@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vhuerta/generation-take-home/issues"
+  },
+  "homepage": "https://github.com/vhuerta/generation-take-home#readme",
+  "dependencies": {
+    "axios": "^0.16.1",
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.5.1",
+    "mongodb": "^2.2.28"
+  }
+}
