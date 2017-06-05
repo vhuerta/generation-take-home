@@ -37,7 +37,13 @@ export const StoreMap = ({
     ));
 
   return (
-    <GoogleMapReact defaultCenter={center} defaultZoom={zoom}>
+    <GoogleMapReact
+      defaultCenter={center}
+      defaultZoom={zoom}
+      bootstrapURLKeys={{
+        key: "AIzaSyDu0Oh8YYyTfam1l4eJZR2gLQbRtaisp6o"
+      }}
+    >
       {renderStores()}
     </GoogleMapReact>
   );
