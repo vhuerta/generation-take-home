@@ -1,0 +1,32 @@
+html,body {
+  margin:0;
+  padding:0;
+  height: 100%; /* needed for container min-height */
+  font-size: 11px !important;
+}
+
+div#root {
+  height: 100%;
+}
+
+div#root > div {
+height: 100%;
+}
+
+img.store-marker {
+  position: absolute;
+  left: -23px;
+  top: -46px;
+}
+
+div.infowindow {
+  width: 350px;
+  position: absolute;
+  left: 20px;
+  top: -100px;
+  cursor: default;
+}
+
+.media-hover:hover {
+  background-color:rgba(10, 10, 10, 0.2);
+}

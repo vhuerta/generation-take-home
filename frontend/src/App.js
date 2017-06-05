@@ -1,40 +1,126 @@
-import React, { Component } from 'react';
-import YourComponent from './YourComponent';
+import React, { Component } from "react";
+import axios from "axios";
+
+import "font-awesome/css/font-awesome.min.css";
+import "bulma/css/bulma.css";
+import "./styles.css";
+
+import { StoreMap } from "./StoreMap";
+import { FavoriteStoresList } from "./FavoriteStoresList";
+import { AppTitle } from "./AppTitle";
+
+import Storage from "./util/localStorage";
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true,
+      stores: [],
+      favorites: [],
+      center: {
+        lat: 19.39068,
+        lng: -99.2836984
+      },
+      activeStoreIndex: null,
+      selectedStoreIndex: null
+    };
+  }
+
+  componentDidMount() {
+    axios
+      .get("https://generation-challange.herokuapp.com/stores")
+      .then(response => {
+        this.setState({
+          loading: false,
+          stores: response.data.stores,
+          favorites: Storage.get("favorites") || []
+        });
+      });
+  }
+
+  onStoreClick(index) {
+    this.setState({
+      selectedStoreIndex: this.state.selectedStoreIndex === index ? null : index
+    });
+  }
+
+  onStoreCloseClick(index) {
+    this.setState({
+      selectedStoreIndex: null
+    });
+  }
+
+  onStoreOver(index) {
+    this.setState({
+      activeStoreIndex: index
+    });
+  }
+
+  onStoreOut(index) {
+    this.setState({
+      activeStoreIndex: null
+    });
+  }
+
+  onAddFavoriteClick(index) {
+    this.setState(s => {
+      const favorites = s.favorites.concat(index);
+      Storage.set("favorites", favorites);
+      return { favorites };
+    });
+  }
+
+  onRemoveFavoriteClick(index) {
+    this.setState(s => {
+      const favorites = s.favorites.filter(i => i !== index);
+      Storage.set("favorites", favorites);
+      return { favorites };
+    });
+  }
+
   render() {
+    const {
+      favorites,
+      stores,
+      center,
+      activeStoreIndex,
+      selectedStoreIndex
+    } = this.state;
+
     return (
-      <div>
-		  <h1>Hi! Welcome to the Generation take-home interview!</h1>
-		  <h3>Intro:</h3>
-		  <p>At Generation, we have many users: students, teachers, employers, and the core Generation team.</p>
-		  <p>Everything we do at Generation is centered around better serving the needs of these users. </p>
-		  <p>In your role, you'll be using your ninja JavaScript skills to empower Generation to better serve these users.</p>
-		  <p>That's why we've included this piece in the interview process. It gives you an opportunity to demonstrate your creative problem-solving, user-centric design, and coding style. </p>
-		  <h3> Here's how it works:</h3>
-		  <p></p>
+      <div className="columns">
+        <div className="column is-two-thirds is-paddingless">
+          <StoreMap
+            center={center}
+            stores={stores}
+            favorites={favorites}
+            selectedStoreIndex={selectedStoreIndex}
+            activeStoreIndex={activeStoreIndex}
+            onStoreClick={this.onStoreClick.bind(this)}
+            onStoreOver={this.onStoreOver.bind(this)}
+            onStoreOut={this.onStoreOut.bind(this)}
+            onStoreCloseClick={this.onStoreCloseClick.bind(this)}
+            onAddFavoriteClick={this.onAddFavoriteClick.bind(this)}
+            onRemoveFavoriteClick={this.onRemoveFavoriteClick.bind(this)}
+          />
+        </div>
+        <div className="column">
 
-		  <p>Below are some real-life <a href="https://en.wikipedia.org/wiki/User_story">user stories</a> that we face at Generation.</p>
-		  <p>We'd love to see how you use JS and React to address these user stories.</p>
-		  <p>Feel free to add libraries, create new components, or otherwise change the codebase. This app is yours!</p>
-		  <p>Implementing the user stories listed should take between 2-5 hours. If you're having trouble, don't be afraid to ask for help!</p>
-		  
-		  <strong>Student user stories:</strong>
-		  <ul>
-		    <li>As a student, I want to see a map of Mexico City</li>
-		    <li>As a student, I want to see a map that has all the stores represented as markers/pins on the map.</li>
-		    <li>Bonus: As a student, I want to be able to click on a store and add it to a list of 'My Favorite Stores'</li>
-		  </ul>
+          <div className="section" style={{ overflow: "auto" }}>
+            <AppTitle />
 
-		  <p>Helpful tips:</p>
-		  <ul>
-		  	<li><i>Feel free to use our Google Maps API key: AIzaSyCVH8e45o3d-5qmykzdhGKd1-3xYua5D2A</i></li>
-		  	<li><i>The list of stores is located in the file store_directory.json </i></li>
-		  	<li><i>Focus on the user, not the technology. A simple implementation that impresses the user is better than a super technical solution that impresses other developers.</i></li>
-		  	<li><i>That said, code that is easy to follow is always appreciated :)</i></li>
-		  </ul>
+            <FavoriteStoresList
+              stores={stores}
+              favorites={favorites}
+              onStoreOver={this.onStoreOver.bind(this)}
+              onStoreOut={this.onStoreOut.bind(this)}
+              onStoreClick={this.onStoreClick.bind(this)}
+              onRemoveFavoriteClick={this.onRemoveFavoriteClick.bind(this)}
+            />
+          </div>
 
-		  <YourComponent/>
+        </div>
       </div>
     );
   }
