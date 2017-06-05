@@ -1,5 +1,12 @@
 import React from "react";
 
+/**
+ * Functional component, App title 
+ * is just the information about the App, title
+ * and usage instructions
+ * 
+ * @author Victor Hyerta <vhuertahnz@gmail.com>
+ */
 export const AppTitle = () => {
   return (
     <div>

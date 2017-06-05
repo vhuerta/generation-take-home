@@ -2,11 +2,28 @@ import React, { Component } from "react";
 
 import { FavoriteStore } from "./FavoriteStore";
 
+/**
+ * FavoriteStoresList, component to render the list of favorite Stores
+ * 
+ * @export
+ * @class FavoriteStoresList
+ * @extends {Component}
+ * @author Victor Huerta <vhuertahnz@gmail.com>
+ */
 export class FavoriteStoresList extends Component {
+
+  
+
   shouldComponentUpdate(nextProps) {
     return nextProps.favorites.length !== this.props.favorites.length;
   }
 
+  /**
+   * Iterates over favorites and return a Favorite 
+   * component for each favorite
+   * 
+   * @returns Array of component Favorite
+   */
   renderFavorites() {
     const {
       favorites,

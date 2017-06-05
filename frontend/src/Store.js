@@ -2,7 +2,24 @@ import React, { Component } from "react";
 
 import { StoreInfoWindow } from "./StoreInfowindow";
 
+/**
+ * Store component, this component generates a marker and StoreInfoWindow
+ * for the stores map
+ * 
+ * @export
+ * @class Store
+ * @extends {Component}
+ * @author Victor Huerta <vhuertahnz@gmail.com>
+ */
 export class Store extends Component {
+
+  /**
+   * Hook than check if the component need to rerender, this verify active, favorite and selected flags
+   * 
+   * @param {Object} nextProps 
+   * @param {Object} nextState 
+   * @returns {Boolean} true if the component needs to be rendered, false if not
+   */
   shouldComponentUpdate(nextProps, nextState) {
     const should =
       this.props.active !== nextProps.active ||
@@ -11,6 +28,11 @@ export class Store extends Component {
     return should;
   }
 
+  /**
+   * Return the component to rerender
+   * 
+   * @returns Store component
+   */
   render() {
     let {
       name,

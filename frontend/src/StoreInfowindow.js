@@ -1,5 +1,14 @@
 import React, { Component } from "react";
 
+/**
+ * StoreInfoWindow component, this component generates a marker and StoreInfoWindow
+ * for the stores map
+ * 
+ * @export
+ * @class Store
+ * @extends {Component}
+ * @author Victor Huerta <vhuertahnz@gmail.com>
+ */
 export const StoreInfoWindow = ({
   name,
   address,

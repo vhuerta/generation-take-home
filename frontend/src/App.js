@@ -1,3 +1,5 @@
+"use strict";
+
 import React, { Component } from "react";
 import axios from "axios";
 
@@ -11,7 +13,31 @@ import { AppTitle } from "./AppTitle";
 
 import Storage from "./util/localStorage";
 
+/**
+ * Mexico center cords
+ */
+const mexicoCenter = {
+  lat: 19.39068,
+  lng: -99.2836984
+}
+
+/**
+ * App component, this component wrap all the app and handle the state
+ * 
+ * @export
+ * @class App
+ * @extends {Component}
+ * 
+ * @author Victor Huerta <vhuertahnz@gmail.com>
+ */
 export default class App extends Component {
+
+  /**
+   * Creates an instance of App, 
+   * and set the initial state
+   * 
+   * @param {Object} props 
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -27,6 +53,12 @@ export default class App extends Component {
     };
   }
 
+  /**
+   * Hook to listen when the component is mounted, 
+   * fetch the stores data from the server and add it to the state
+   * 
+   * @memberof App
+   */
   componentDidMount() {
     axios
       .get("https://generation-challange.herokuapp.com/stores")
@@ -39,30 +71,57 @@ export default class App extends Component {
       });
   }
 
+  /**
+   * Handle when a stores is clicked
+   * 
+   * @param {Array} index Store index of array
+   */
   onStoreClick(index) {
     this.setState({
       selectedStoreIndex: this.state.selectedStoreIndex === index ? null : index
     });
   }
 
+
+  /**
+   * Handle when a store infowindow close button is clicked
+   * 
+   * @param {Array} index Store index of array
+   */
   onStoreCloseClick(index) {
     this.setState({
       selectedStoreIndex: null
     });
   }
 
+  /**
+   * Handle when the cursor is over a store
+   * 
+   * @param {Array} index Store index of array
+   */
   onStoreOver(index) {
     this.setState({
       activeStoreIndex: index
     });
   }
 
+  /**
+   * Handle when the cursor leaves a store
+   * 
+   * @param {Array} index Store index of array
+   */
   onStoreOut(index) {
     this.setState({
       activeStoreIndex: null
     });
   }
 
+
+  /**
+   * Handle when add to favorites is clicked
+   * 
+   * @param {Array} index Store index of array
+   */
   onAddFavoriteClick(index) {
     this.setState(s => {
       const favorites = s.favorites.concat(index);
@@ -71,6 +130,11 @@ export default class App extends Component {
     });
   }
 
+  /**
+   * Handle when remove from favorites is clicked
+   * 
+   * @param {Array} index Store index of array
+   */
   onRemoveFavoriteClick(index) {
     this.setState(s => {
       const favorites = s.favorites.filter(i => i !== index);
@@ -79,6 +143,11 @@ export default class App extends Component {
     });
   }
 
+  /**
+   * Render the App component
+   * 
+   * @returns The component
+   */
   render() {
     const {
       favorites,

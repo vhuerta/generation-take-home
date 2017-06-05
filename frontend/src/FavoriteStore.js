@@ -1,5 +1,10 @@
 import React from "react";
 
+/**
+ * FavoriteStores, component to render a favorite store 
+ * 
+ * @author Victor Huerta <vhuertahnz@gmail.com>
+ */
 export const FavoriteStore = ({
   name,
   address,
